@@ -21,6 +21,10 @@ TicTacToeDisplay display;
 
 void setup() {
   // set up control reading  
+  for (int i = 0; i < 9; i++)
+  {
+    current_game[i] = 0;
+  }
   pinMode(VRX, INPUT);
   pinMode(VRY, INPUT);
   pinMode(SW, INPUT_PULLUP);
@@ -152,15 +156,28 @@ void check_victory()
   }
 
   // check diagonal
-  if ((current_game[0] == current_game[4] && current_game[4] == current_game[8]) || 
-      (current_game[2] == current_game[4] && current_game[4] == current_game[6]) )
+  if ((current_game[0] == current_game[4] && current_game[4] == current_game[8]))
   {
-      if (current_game[0] == 1)
+      if (current_game[4] == 1)
       {
         display.drawVictoryLine(0,8);
         declare_victory('o');
       }
-      else if (current_game[0] == 2)
+      else if (current_game[4] == 2)
+      {
+        display.drawVictoryLine(0,8);
+        declare_victory('x'); 
+      }
+  }
+
+  if (current_game[2] == current_game[4] && current_game[4] == current_game[6])
+  {
+      if (current_game[4] == 1)
+      {
+        display.drawVictoryLine(2,6);
+        declare_victory('o');
+      }
+      else if (current_game[4] == 2)
       {
         display.drawVictoryLine(2,6);
         declare_victory('x'); 
